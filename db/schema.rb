@@ -11,6 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20130627210513) do
+
+  create_table "transactions", force: true do |t|
+    t.text     "description"
+    t.datetime "date"
+    t.string   "direction"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "amount_pennies",  default: 0,     null: false
+    t.string   "amount_currency", default: "GBP", null: false
+  end
 
 end

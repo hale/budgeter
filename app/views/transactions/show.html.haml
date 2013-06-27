@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Description:
+  = @transaction.description
+%p
+  %b Date:
+  = @transaction.date
+%p
+  %b Direction:
+  = @transaction.direction
+%p
+  %b Amount:
+  = humanized_money_with_symbol @transaction.amount
+
+= link_to 'Edit', edit_transaction_path(@transaction)
+\|
+= link_to 'Back', transactions_path

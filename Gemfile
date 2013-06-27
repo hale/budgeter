@@ -13,7 +13,6 @@ end
 gem 'figaro'
 gem 'haml-rails'
 gem 'pg'
-gem 'protected_attributes'
 gem 'thin'
 gem 'compass-rails'
 gem 'zurb-foundation'

@@ -1,0 +1,29 @@
+%h1 Listing transactions
+
+%table
+  %tr
+    %th Description
+    %th Date
+    %th Direction
+    %th Amount
+    %th
+    %th
+    %th
+
+  - @transactions.each do |transaction|
+    %tr
+      %td= transaction.description
+      %td= transaction.date
+      %td= transaction.direction
+      %td= transaction.amount
+      %td= link_to 'Show', transaction
+      %td= link_to 'Edit', edit_transaction_path(transaction)
+      %td= link_to 'Destroy', transaction, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= render :partial => 'new_inline', :locals => { :transaction => Transaction.new }
+
+%br
+
+= link_to 'New Transaction', new_transaction_path
