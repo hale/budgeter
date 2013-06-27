@@ -17,6 +17,7 @@ gem 'protected_attributes'
 gem 'thin'
 gem 'compass-rails'
 gem 'zurb-foundation'
+gem 'money-rails'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :rbx]
