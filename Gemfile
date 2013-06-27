@@ -15,10 +15,8 @@ gem 'haml-rails'
 gem 'pg'
 gem 'protected_attributes'
 gem 'thin'
-group :assets do
-  gem 'compass-rails'
-  gem 'zurb-foundation'
-end
+gem 'compass-rails'
+gem 'zurb-foundation'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :rbx]
