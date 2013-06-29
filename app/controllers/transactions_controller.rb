@@ -27,7 +27,7 @@ class TransactionsController < ApplicationController
   def create
     @transaction = Transaction.new(transaction_params)
     @transaction.date = Date.parse(params[:transaction][:date]) if @transaction.date.nil?
-    #@transaction.date = Date.parse params[:date]
+    @transaction.category = Category.find_or_initialize_by_name(params[:category][:name])
 
     respond_to do |format|
       if @transaction.save

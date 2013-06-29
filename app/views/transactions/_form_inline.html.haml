@@ -21,4 +21,8 @@
       %div.large-2.columns
         = f.label :direction
         = f.select :direction, ['Out', 'In']
+      %div.large-2.columns
+        = fields_for @transaction.build_category do |category_fields|
+          = category_fields.label :category_name
+          = category_fields.text_field :name
       = f.submit 'Save', :class => "button small inline"
