@@ -6,23 +6,19 @@
         - @transaction.errors.full_messages.each do |msg|
           %li= msg
 
-  %fieldset
-    %legend Quick-add transaction
-    %div.row
-      %div.large-2.columns
-        = f.label :date
-        = f.text_field :date, :value => Date.today.to_s(:short)
-      %div.large-4.columns
-        = f.label :description
-        = f.text_field :description, :autofocus => true
-      %div.large-2.columns
-        = f.label :amount
-        = f.text_field :amount
-      %div.large-2.columns
-        = f.label :direction
-        = f.select :direction, ['Out', 'In']
-      %div.large-2.columns
-        = fields_for @transaction.build_category do |category_fields|
-          = category_fields.label :category_name
-          = category_fields.text_field :name
-      = f.submit 'Save', :class => "button small inline"
+  %fieldset.large-2
+    %legend Quick-add
+    %div
+      = f.label :date
+      = f.text_field :date, :value => Date.today.to_s(:short)
+    %div
+      = f.label :amount
+      = f.text_field :amount, :autofocus => true
+    %div
+      = fields_for @transaction.build_category do |category_fields|
+        = category_fields.label :category_name
+        = category_fields.text_field :name
+    %div
+      = f.label :direction
+      = f.select :direction, ['Out', 'In']
+    = f.submit 'Save', :class => "button small inline prefix"
