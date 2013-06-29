@@ -2,7 +2,7 @@ class CreateTransactions < ActiveRecord::Migration
   def change
     create_table :transactions do |t|
       t.text :description
-      t.datetime :date
+      t.date :date
       t.string :direction
 
       t.timestamps

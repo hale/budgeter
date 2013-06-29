@@ -5,6 +5,7 @@ class TransactionsController < ApplicationController
   # GET /transactions.json
   def index
     @transactions = Transaction.all
+    @transaction = Transaction.new
   end
 
   # GET /transactions/1
@@ -25,6 +26,8 @@ class TransactionsController < ApplicationController
   # POST /transactions.json
   def create
     @transaction = Transaction.new(transaction_params)
+    @transaction.date = Date.parse(params[:transaction][:date]) if @transaction.date.nil?
+    #@transaction.date = Date.parse params[:date]
 
     respond_to do |format|
       if @transaction.save
