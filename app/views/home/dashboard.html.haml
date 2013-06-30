@@ -1,0 +1,8 @@
+%h1.right
+  = Date.today.to_s(:long)
+%hr
+= render :partial => 'transactions/form_inline'
+
+%h2
+  Recent Transactions
+= render :partial => 'transactions/transactions'
