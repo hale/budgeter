@@ -7,6 +7,15 @@
   %b Budget:
   = @category.budget
 
+%p
+  %b Spend:
+  = currency_symbol + @category.transactions.map(&:amount).reduce(&:+)
+
+- if @transactions.any?
+  %h2
+    Transactions
+  = render :partial => 'transactions/transactions'
+
 = link_to 'Edit', edit_category_path(@category)
 \|
 = link_to 'Back', categories_path

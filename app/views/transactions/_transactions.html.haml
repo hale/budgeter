@@ -1,21 +1,17 @@
 %table
   %tr
     %th Date
-    %th Description
     %th Amount
     %th Direction
     %th Category
-    %th
     %th
     %th
 
   - @transactions.order('date desc').each do |transaction|
     %tr
       %td= pretty_date transaction.date
-      %td= transaction.description
       %td= humanized_money_with_symbol transaction.amount
       %td= transaction.direction
       %td= transaction.category.try(:name)
-      %td= link_to 'Show', transaction
       %td= link_to 'Edit', edit_transaction_path(transaction)
       %td= link_to 'Destroy', transaction, :method => :delete, :data => { :confirm => 'Are you sure?' }
