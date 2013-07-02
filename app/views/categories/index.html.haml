@@ -8,7 +8,7 @@
     %th
     %th
 
-  - @categories.by_transaction_count.each do |category|
+  - @categories.each do |category|
     %tr
       %td= category.name
       %td= category.transactions.count
