@@ -3,15 +3,15 @@
 %table
   %tr
     %th Name
-    %th Budget
+    %th Transaction count
     %th
     %th
     %th
 
-  - @categories.each do |category|
+  - @categories.by_transaction_count.each do |category|
     %tr
       %td= category.name
-      %td= humanized_money_with_symbol category.budget
+      %td= category.transactions.count
       %td= link_to 'Show', category
       %td= link_to 'Edit', edit_category_path(category)
       %td= link_to 'Destroy', category, :method => :delete, :data => { :confirm => 'Are you sure?' }

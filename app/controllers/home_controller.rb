@@ -1,6 +1,10 @@
 class HomeController < ApplicationController
   def dashboard
-    @transaction = Transaction.new
-    @transactions = Transaction.recent
+    month = params[:month]
+    year = params[:year]
+    @date = (month && year) ? Date.parse("#{month}/#{year}") : Date.today
+    @transaction = Transaction.new(:date => @date)
+    @transactions = Transaction.month(@date)
+    @categories = Category.all
   end
 end

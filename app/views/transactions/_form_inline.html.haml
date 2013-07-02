@@ -10,7 +10,7 @@
     %legend Quick-add
     %div.large-3.columns
       = f.label :date
-      = f.text_field :date, :value => Date.today.to_s(:short)
+      = f.text_field :date, :value => (@transaction.date.to_s(:short) if @transaction.date)
     %div.large-3.columns
       = f.label :amount
       = f.text_field :amount, :autofocus => true

@@ -1,0 +1,15 @@
+%table
+  %tr
+    %th Name
+    %th Spend
+    %th Left
+
+  - @categories.each do |category|
+    %tr
+      %td= category.name
+      %td= currency_symbol + category.spend(@date)
+      %td= currency_symbol + category.remaining(@date)
+
+%br
+
+= link_to 'New Category', new_category_path

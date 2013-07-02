@@ -3,8 +3,8 @@ Budgeter::Application.routes.draw do
 
   resources :transactions
 
-  root :to => 'home#dashboard'
+  root 'home#dashboard'
 
-   get 'dashboard', :to => 'home#dashboard', :as => :dashboard_path
+ get 'dashboard(/:year/:month)', :to => 'home#dashboard', :as => :dashboard_path
 
 end

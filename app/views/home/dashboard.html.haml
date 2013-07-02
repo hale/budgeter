@@ -1,9 +1,23 @@
-%h1.right
-  = Date.today.to_s(:long)
+%div.row
+  %h1.right
+    = @date.strftime("%h %Y")
+%div.row
+  %div.large-2.right
+    %div.left
+      - prev_month = @date - 1.month
+      = link_to prev_month.strftime('%h %y'), "/dashboard/#{prev_month.year}/#{prev_month.month}"
+    %div.right
+      - next_month = @date + 1.month
+      = link_to next_month.strftime('%h %y'), "/dashboard/#{next_month.year}/#{next_month.month}"
 %hr
 = render :partial => 'transactions/form_inline'
 
-%div.large-6
+%div.large-7.columns
   %h2
-    Recent Transactions
+    Transactions
   = render :partial => 'transactions/transactions'
+
+%div.large-5.columns
+  %h2
+    Categories
+  = render :partial => 'categories/month'
