@@ -1,19 +1,8 @@
 %p#notice= notice
 
-%p
-  %b Name:
-  = @category.name
-%p
-  %b Budget:
-  = @category.budget
-
-%p
-  %b Spend:
-  = currency_symbol + @category.transactions.map(&:amount).reduce(&:+)
-
 - if @transactions.any?
   %h2
-    Transactions
+    = "#{@category.name.capitalize} transactions"
   = render :partial => 'transactions/transactions'
 
 = link_to 'Edit', edit_category_path(@category)

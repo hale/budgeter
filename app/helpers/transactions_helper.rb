@@ -7,7 +7,7 @@ module TransactionsHelper
     #elsif 5.days.ago < date
       #"#{(Date.today - date).to_i} days ago"
     else
-      date.strftime "%a %d %b"
+      date.strftime("%a #{date.day.ordinalize}")
     end
   end
 end

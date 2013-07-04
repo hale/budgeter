@@ -31,7 +31,7 @@ class TransactionsController < ApplicationController
 
     respond_to do |format|
       if @transaction.save
-        format.html { redirect_to transactions_path, notice: 'Transaction was successfully created.' }
+        format.html { redirect_to :back, notice: 'Transaction was successfully created.' }
         format.json { render action: 'show', status: :created, location: @transaction }
       else
         format.html { render action: 'new' }
@@ -43,8 +43,13 @@ class TransactionsController < ApplicationController
   # PATCH/PUT /transactions/1
   # PATCH/PUT /transactions/1.json
   def update
+    date_category = {
+      :date => Date.parse(params[:transaction][:date]),
+      :category => Category.find_or_initialize_by_name(params[:category][:name])
+    }
+
     respond_to do |format|
-      if @transaction.update(transaction_params)
+      if @transaction.update(transaction_params.merge(date_category))
         format.html { redirect_to @transaction, notice: 'Transaction was successfully updated.' }
         format.json { head :no_content }
       else
@@ -59,7 +64,7 @@ class TransactionsController < ApplicationController
   def destroy
     @transaction.destroy
     respond_to do |format|
-      format.html { redirect_to transactions_url }
+      format.html { redirect_to transactions_path }
       format.json { head :no_content }
     end
   end
@@ -72,6 +77,6 @@ class TransactionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
-      params.require(:transaction).permit(:description, :date, :direction, :amount)
+      params.require(:transaction).permit(:date, :amount)
     end
 end

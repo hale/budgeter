@@ -1,7 +1,6 @@
 class CreateTransactions < ActiveRecord::Migration
   def change
     create_table :transactions do |t|
-      t.text :description
       t.date :date
       t.string :direction
 

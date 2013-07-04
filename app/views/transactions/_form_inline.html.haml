@@ -6,19 +6,17 @@
         - @transaction.errors.full_messages.each do |msg|
           %li= msg
 
-  %fieldset
-    %legend Quick-add
-    %div.large-3.columns
-      = f.label :date
-      = f.text_field :date, :value => (@transaction.date.to_s(:short) if @transaction.date)
-    %div.large-3.columns
-      = f.label :amount
-      = f.text_field :amount, :autofocus => true
-    %div.large-3.columns
-      = fields_for @transaction.build_category do |category_fields|
-        = category_fields.label :category_name
-        = category_fields.text_field :name
-    %div.large-2.columns
-      = f.label :direction
-      = f.select :direction, ['Out', 'In']
-    = f.submit 'Save', :class => "button small inline"
+  %div
+    %fieldset
+      -#%legend Transaction
+      %div
+        = f.label :date
+        = f.text_field :date, :value => (@transaction.date.to_s(:short) if @transaction.date)
+      %div
+        = f.label :amount
+        = f.text_field :amount, :autofocus => true
+      %div
+        = fields_for (@transaction.category || @transaction.build_category) do |category_fields|
+          = category_fields.label :category_name
+          = category_fields.text_field :name
+      = f.submit 'Save'#, :class => "hide"
