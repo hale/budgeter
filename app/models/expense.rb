@@ -1,4 +1,4 @@
-class Transaction < ActiveRecord::Base
+class Expense < ActiveRecord::Base
   validates_presence_of :category, :date, :amount
   belongs_to :category
   accepts_nested_attributes_for :category

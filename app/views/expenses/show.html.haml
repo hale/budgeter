@@ -1,0 +1,14 @@
+
+%p
+  %b Description:
+  = @expense.description
+%p
+  %b Date:
+  = @expense.date
+%p
+  %b Amount:
+  = humanized_money_with_symbol @expense.amount
+
+= link_to 'Edit', edit_expense_path(@expense)
+\|
+= link_to 'Back', expenses_path

@@ -5,8 +5,8 @@ class HomeController < ApplicationController
     @date = Date.parse("#{year}/#{month}") if month && year
     @date = Date.today if !@date || @date.month == Date.today.month
 
-    @categories = Category.all.by_transaction_count
-    @transaction = Transaction.new(:date => @date)
-    @transactions = Transaction.month(@date)
+    @categories = Category.all.by_expense_count
+    @expense = Expense.new(:date => @date)
+    @expenses = Expense.month(@date)
   end
 end

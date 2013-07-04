@@ -1,4 +1,4 @@
-module TransactionsHelper
+module ExpensesHelper
   def pretty_date date
     if date == Date.today
       "Today"

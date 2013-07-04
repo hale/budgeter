@@ -4,13 +4,13 @@ class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.by_transaction_count
+    @categories = Category.by_expense_count
   end
 
   # GET /categories/1
   # GET /categories/1.json
   def show
-    @transactions = @category.transactions
+    @expenses = @category.expenses
   end
 
   # GET /categories/new

@@ -1,9 +1,9 @@
 %p#notice= notice
 
-- if @transactions.any?
+- if @expenses.any?
   %h2
-    = "#{@category.name.capitalize} transactions"
-  = render :partial => 'transactions/transactions'
+    = "#{@category.name.capitalize} expenses"
+  = render :partial => 'expenses/expenses'
 
 = link_to 'Edit', edit_category_path(@category)
 \|

@@ -1,0 +1,11 @@
+%table#expenses
+  %tr
+    %th#date Date
+    %th Amount
+    %th Category
+
+  - @expenses.order('date desc').each do |expense|
+    %tr
+      %td= pretty_date expense.date
+      %td= humanized_money_with_symbol expense.amount
+      %td= expense.category.try(:name)
