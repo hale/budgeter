@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Amount:
+  = @income.amount
+%p
+  %b Name:
+  = @income.name
+%p
+  %b Date:
+  = @income.date
+
+= link_to 'Edit', edit_income_path(@income)
+\|
+= link_to 'Back', incomes_path

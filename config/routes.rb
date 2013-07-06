@@ -1,4 +1,6 @@
 Budgeter::Application.routes.draw do
+  resources :incomes
+
   resources :categories
 
   resources :expenses

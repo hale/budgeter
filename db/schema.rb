@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130704194305) do
+ActiveRecord::Schema.define(version: 20130706222943) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -33,5 +33,14 @@ ActiveRecord::Schema.define(version: 20130704194305) do
   end
 
   add_index "expenses", ["category_id"], name: "index_expenses_on_category_id", using: :btree
+
+  create_table "incomes", force: true do |t|
+    t.integer  "amount_pennies",  default: 0,     null: false
+    t.string   "amount_currency", default: "GBP", null: false
+    t.string   "name"
+    t.date     "date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
