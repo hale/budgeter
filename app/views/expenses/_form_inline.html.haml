@@ -1,3 +1,4 @@
+- @expense ||= Expense.new(:date => (@date || Date.today))
 = form_for @expense do |f|
   - if @expense.errors.any?
     #error_explanation
@@ -17,5 +18,6 @@
       = fields_for (@expense.category || @expense.build_category) do |category_fields|
         = category_fields.label :category_name
         = category_fields.text_field :name
-    %div.large-2.columns
-      = f.submit 'Save', :class => "button small prefix"
+    %div.large-3.columns
+      = f.label ' '
+      = f.submit 'Save', :class => "button prefix"
