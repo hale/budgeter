@@ -6,16 +6,16 @@
         - @expense.errors.full_messages.each do |msg|
           %li= msg
 
-  %div
-    %fieldset
-      %div.large-2.columns
-        = f.label :date
-        = f.text_field :date, :value => (@expense.date.to_s(:short) if @expense.date)
-      %div.large-2.columns
-        = f.label :amount
-        = f.text_field :amount, :autofocus => true
-      %div.large-2.columns
-        = fields_for (@expense.category || @expense.build_category) do |category_fields|
-          = category_fields.label :category_name
-          = category_fields.text_field :name
-      = f.submit 'Save'#, :class => "hide"
+  %fieldset
+    %div.large-3.columns
+      = f.label :date
+      = f.text_field :date, :value => (@expense.date.to_s(:short) if @expense.date)
+    %div.large-3.columns
+      = f.label :amount
+      = f.text_field :amount, :autofocus => true
+    %div.large-3.columns
+      = fields_for (@expense.category || @expense.build_category) do |category_fields|
+        = category_fields.label :category_name
+        = category_fields.text_field :name
+    %div.large-2.columns
+      = f.submit 'Save', :class => "button small prefix"

@@ -9,15 +9,15 @@
 
 %hr
 
-%div.row
-  %h2
-    Quick-add
-  = render :partial => 'expenses/form_inline'
-%div.large-6.columns.right
+%h2
+  Quick-add
+= render :partial => 'expenses/form_inline'
+
+%div.large-7.columns
   %h2
     Budget
   = render :partial => 'categories/monthly_spend'
-%div.large-6.columns.left
+%div.large-5.columns
   %h2
     Expenses
   = render :partial => 'home/expenses'

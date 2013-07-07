@@ -3,8 +3,6 @@
     %th Name
     %th Spend
     %th Left
-    %th Projected Spend
-    %th Projected Remaining
     %th Projected Difference
 
   - @categories.each do |category|
@@ -12,6 +10,4 @@
       %td= link_to category.name.capitalize, category
       %td= currency_symbol + category.spend(@date)
       %td= currency_symbol + category.remaining(@date)
-      %td= currency_symbol + category.projected_spend(@date)
-      %td= currency_symbol + category.projected_remaining(@date)
       %td= currency_symbol + category.projected_difference(@date)
