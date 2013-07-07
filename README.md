@@ -3,6 +3,8 @@ Budgeter
 
 [![Code Climate](https://codeclimate.com/github/hale/budgeter.png)](https://codeclimate.com/github/hale/budgeter)
 
+[Feature planning board](https://trello.com/b/tlRBVSiA)
+
 Budgeter is an expenses tracker and budget planner.  It helps you keep on top
 of spending with the goals of eliminating debt and increasing savings.
 
