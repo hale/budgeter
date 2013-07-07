@@ -14,3 +14,4 @@
       %td= expense.category.try(:name)
       %td= link_to "show", expense
       %td= link_to 'edit', edit_expense_path(expense)
+      %td= link_to 'destroy', expense, :method => :delete, :data => { :confirm => 'Are you sure?' }
