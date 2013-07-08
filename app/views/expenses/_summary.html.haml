@@ -1,0 +1,12 @@
+%table
+  %tr
+    %th Category
+    %th Total
+
+    - @categories.each do |category|
+      %tr
+        %td= link_to category.name.capitalize, category
+        %td= currency_symbol + category.spend(@date)
+
+
+

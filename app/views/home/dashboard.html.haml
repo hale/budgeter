@@ -9,12 +9,17 @@
 
 %hr
 
-
-%div.large-7.columns
+%div.large-3.columns
   %h2
-    Budget
-  = render :partial => 'categories/monthly_spend'
-%div.large-5.columns
+    Summary
+  = render :partial => 'expenses/summary'
+%div.large-8.columns
   %h2
     Expenses
-  = render :partial => 'home/expenses'
+    %small
+      = link_to "new", '#', 'data-reveal-id' => 'quick-add-modal'
+
+  - @expenses_by_week.each_pair do |date, expenses|
+    %h3
+      = date.to_s(:week)
+    = render :partial => 'home/expenses', :locals => { :expenses => expenses }

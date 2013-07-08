@@ -7,6 +7,8 @@ class HomeController < ApplicationController
 
     @categories = Category.all.by_expense_count
     @expense = Expense.new(:date => @date)
-    @expenses = Expense.month(@date)
+    @expenses_by_week = Expense.month(@date)
+      .order('date desc')
+      .all.group_by { |expense| expense.date.beginning_of_week }
   end
 end
