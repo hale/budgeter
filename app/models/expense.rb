@@ -3,9 +3,10 @@ class Expense < ActiveRecord::Base
   belongs_to :category
   accepts_nested_attributes_for :category
 
+  scope :recent,
+    ->       { since(7.days.ago).limit(10) }
   scope :since,
     ->(date) { where('date > ?', date) }
-  scope :recent, -> { since(7.days.ago).limit(10) }
   scope :month,
     ->(date) { where(:date => date.beginning_of_month..date.end_of_month) }
   scope :category,
@@ -13,5 +14,6 @@ class Expense < ActiveRecord::Base
 
   register_currency :gbp
   monetize :amount_pennies, :numericality => { :greater_than => 0 }
+
 
 end
