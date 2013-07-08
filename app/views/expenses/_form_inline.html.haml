@@ -19,5 +19,8 @@
         = category_fields.label :category_name
         = category_fields.text_field :name
     %div.large-3.columns
+      = f.label :description
+      = f.text_field :description
+    %div
       = f.label ' '
       = f.submit 'Save', :class => "button prefix"
