@@ -15,5 +15,28 @@ class Expense < ActiveRecord::Base
   register_currency :gbp
   monetize :amount_pennies, :numericality => { :greater_than => 0 }
 
+  def self.build_with_defaults(params)
+    binding.pry
+    expense = new(params[:expense])
+    expense.date = Date.parse(params[:expense][:date]) if expense.date.nil?
+    expense.category = Category.find_or_initialize_by_name(
+      params[:category][:name]
+    )
+    expense
+  end
+
+  def update_with_defaults(params)
+    expense_params = params[:expense]
+    expense_params.merge!({
+      :date => Date.parse(params[:expense][:date]),
+      :category => Category.find_or_initialize_by_name(params[:category][:name])
+    })
+    update(expense_params)
+  end
+
+  def new_or_existing_category
+    category || build_category
+  end
+
 
 end
