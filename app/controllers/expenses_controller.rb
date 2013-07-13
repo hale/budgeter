@@ -1,5 +1,6 @@
 class ExpensesController < ApplicationController
   before_action :set_expense, only: [:show, :edit, :update, :destroy]
+  respond_to :html
 
   def index
     @expenses = Expense.all
@@ -20,16 +21,8 @@ class ExpensesController < ApplicationController
     @expense = Expense.new(expense_params)
     @expense.date = Date.parse(params[:expense][:date]) if @expense.date.nil?
     @expense.category = Category.find_or_initialize_by_name(params[:category][:name])
-
-    respond_to do |format|
-      if @expense.save
-        format.html { redirect_to :back, notice: 'Expense was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @expense }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @expense.errors, status: :unprocessable_entity }
-      end
-    end
+    flash[:notice] = 'Expense was successfully created.' if @expense.save
+    respond_with @expense
   end
 
   def update
@@ -37,24 +30,16 @@ class ExpensesController < ApplicationController
       :date => Date.parse(params[:expense][:date]),
       :category => Category.find_or_initialize_by_name(params[:category][:name])
     }
-
-    respond_to do |format|
-      if @expense.update(expense_params.merge(date_category))
-        format.html { redirect_to @expense, notice: 'Expense was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @expense.errors, status: :unprocessable_entity }
-      end
+    if @expense.update(expense_params.merge(date_category))
+      flash[:notice] = 'Expense was successfully updated.'
     end
+    respond_with @expense
   end
 
   def destroy
     @expense.destroy
-    respond_to do |format|
-      format.html { redirect_to expenses_path }
-      format.json { head :no_content }
-    end
+    flash[:notice] = "Successfully destroyed expense"
+    respond_with @expense
   end
 
   private
