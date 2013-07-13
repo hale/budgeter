@@ -38,5 +38,11 @@ class Expense < ActiveRecord::Base
     category || build_category
   end
 
+  def self.by_week(date=Date.today)
+    month(date).order('date DESC').all.group_by do |expense|
+      expense.date.beginning_of_week
+    end
+  end
+
 
 end
