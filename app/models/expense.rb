@@ -16,7 +16,6 @@ class Expense < ActiveRecord::Base
   monetize :amount_pennies, :numericality => { :greater_than => 0 }
 
   def self.build_with_defaults(params)
-    binding.pry
     expense = new(params[:expense])
     expense.date = Date.parse(params[:expense][:date]) if expense.date.nil?
     expense.category = Category.find_or_initialize_by_name(
