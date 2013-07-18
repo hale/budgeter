@@ -20,20 +20,26 @@ class ExpensesController < ApplicationController
   def create
     @expense = Expense.build_with_defaults(expense_params_with_category)
     flash[:notice] = 'Expense was successfully created.' if @expense.save
-    respond_with @expense
+    respond_with @expense do |format|
+      format.html { redirect_to root_path }
+    end
   end
 
   def update
     if @expense.update_with_defaults(expense_params_with_category)
       flash[:notice] = 'Expense was successfully updated.'
     end
-    respond_with @expense
+    respond_with @expense do |format|
+      format.html { redirect_to root_path }
+    end
   end
 
   def destroy
     @expense.destroy
     flash[:notice] = "Successfully destroyed expense"
-    respond_with @expense
+    respond_with @expense do |format|
+      format.html { redirect_to root_path }
+    end
   end
 
   private
