@@ -1,4 +1,5 @@
 class IncomesController < ApplicationController
+  respond_to :html
   before_action :set_income, only: [:show, :edit, :update, :destroy]
 
   def index
