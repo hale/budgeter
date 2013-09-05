@@ -16,21 +16,15 @@ class Expense < ActiveRecord::Base
   monetize :amount_pennies, :numericality => { :greater_than => 0 }
 
   def self.build_with_defaults(params)
-    expense = new(params[:expense])
-    begin
-      expense.date = Date.parse(params[:expense][:date]) if expense.date.nil?
-    rescue ArgumentError
+    new(params[:expense]).tap do |expense|
+      expense.date ||= Date.strptime(params[:expense][:date], '%Y-%m-%d')
+      expense.category = Category.find_or_initialize_by_name(params[:category][:name])
     end
-    expense.category = Category.find_or_initialize_by_name(
-      params[:category][:name]
-    )
-    expense
   end
 
   def update_with_defaults(params)
-    expense_params = params[:expense]
-    expense_params.merge!({
-      :date => Date.parse(params[:expense][:date]),
+    expense_params = params[:expense].merge!({
+      :date => Date.strptime(params[:expense][:date], '%Y-%m-%d'),
       :category => Category.find_or_initialize_by_name(params[:category][:name])
     })
     update(expense_params)

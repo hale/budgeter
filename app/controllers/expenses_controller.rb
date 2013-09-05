@@ -19,7 +19,6 @@ class ExpensesController < ApplicationController
 
   def create
     @expense = Expense.build_with_defaults(expense_params_with_category)
-
     respond_with @expense do |format|
       if @expense.save
         flash[:notice] = 'Expense was successfully created.'

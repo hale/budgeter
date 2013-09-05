@@ -4,7 +4,7 @@
   %fieldset
     %div.large-3.columns
       = f.label :date
-      = f.text_field :date, :value => (@expense.date.to_s(:short) if @expense.date)
+      = f.text_field :date, :data_parse_date => true, :value => (@expense.date if @expense.date)
     %div.large-3.columns
       = f.label :amount
       = f.text_field :amount, :autofocus => true
