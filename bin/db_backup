@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# Dumps the specified database into sql
+function backup() {
+  echo "Backing up $1 to $2"
+  pg_dump -h localhost $1 -f $2
+}
+
+# Creates a private gist with contents $1
+function upload() {
+echo "Uploading $1"
+  gist -p $1
+}
+
+db_name="budgeter_development"
+filename="budgeter_development-$(date '+%Y%m%d%H%M%S').sql"
+backup $db_name $filename
+upload $filename
+rm $filename
