@@ -23,12 +23,10 @@ class ExpensesController < ApplicationController
     respond_with @expense do |format|
       if @expense.save
         flash[:notice] = 'Expense was successfully created.'
-        format.html { redirect_to root_path }
         format.json do
           render :json => { :location => root_path }, :status => 302
         end
       else
-        format.html { redirect_to root_path }
         format.json do
           render :json => { :errors => @expense.errors }, :status => 422
         end
@@ -37,11 +35,17 @@ class ExpensesController < ApplicationController
   end
 
   def update
-    if @expense.update_with_defaults(expense_params_with_category)
-      flash[:notice] = 'Expense was successfully updated.'
-    end
     respond_with @expense do |format|
-      format.html { redirect_to root_path }
+      if @expense.update_with_defaults(expense_params_with_category)
+        flash[:notice] = 'Expense was successfully updated.'
+        format.json do
+          render :json => { :location => root_path }, :status => 302
+        end
+      else
+        format.json do
+          render :json => { :errors => @expense.errors }, :status => 422
+        end
+      end
     end
   end
 
