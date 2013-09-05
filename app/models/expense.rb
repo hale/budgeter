@@ -17,7 +17,10 @@ class Expense < ActiveRecord::Base
 
   def self.build_with_defaults(params)
     expense = new(params[:expense])
-    expense.date = Date.parse(params[:expense][:date]) if expense.date.nil?
+    begin
+      expense.date = Date.parse(params[:expense][:date]) if expense.date.nil?
+    rescue ArgumentError
+    end
     expense.category = Category.find_or_initialize_by_name(
       params[:category][:name]
     )
