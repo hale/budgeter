@@ -6,15 +6,15 @@ jQuery ($) ->
   # validate the form server-side
   $("form[data-remote='true']").remoteValidation()
 
-  # parse the data server-side
-  $("input#expense_date[data_parse_date='true']").change ->
-    $this = $(this)
-    date = $this.val()
-    $.ajax '/parse_date',
-      type: 'POST',
-      data: { 'date': date }
-      error: ->
-        $this.addClass('error')
-      success: (json) ->
-        $this.removeClass('error')
-        $this.val(json.date)
+# parse the data server-side
+$("input#expense_date[data_parse_date='true']").change ->
+  $this = $(this)
+  date = $this.val()
+  $.ajax '/parse_date',
+    type: 'POST',
+    data: { 'date': date }
+    error: ->
+      $this.addClass('error')
+    success: (json) ->
+      $this.removeClass('error')
+      $this.val(json.date)
