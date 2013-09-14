@@ -1,6 +1,6 @@
 class ExpensesController < ApplicationController
   before_action :set_expense, only: [:show, :edit, :update, :destroy]
-  respond_to :html
+  respond_to :html, :json
 
   def index
     @expenses = Expense.all
@@ -19,18 +19,32 @@ class ExpensesController < ApplicationController
 
   def create
     @expense = Expense.build_with_defaults(expense_params_with_category)
-    flash[:notice] = 'Expense was successfully created.' if @expense.save
     respond_with @expense do |format|
-      format.html { redirect_to root_path }
+      if @expense.save
+        flash[:notice] = 'Expense was successfully created.'
+        format.json do
+          render :json => { :location => root_path }, :status => 302
+        end
+      else
+        format.json do
+          render :json => { :errors => @expense.errors }, :status => 422
+        end
+      end
     end
   end
 
   def update
-    if @expense.update_with_defaults(expense_params_with_category)
-      flash[:notice] = 'Expense was successfully updated.'
-    end
     respond_with @expense do |format|
-      format.html { redirect_to root_path }
+      if @expense.update_with_defaults(expense_params_with_category)
+        flash[:notice] = 'Expense was successfully updated.'
+        format.json do
+          render :json => { :location => root_path }, :status => 302
+        end
+      else
+        format.json do
+          render :json => { :errors => @expense.errors }, :status => 422
+        end
+      end
     end
   end
 

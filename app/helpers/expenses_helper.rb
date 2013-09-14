@@ -1,13 +1,9 @@
 module ExpensesHelper
   def pretty_date date
-    if date == Date.today
-      "Today"
-    elsif date == Date.yesterday
-      "Yesterday"
-    #elsif 5.days.ago < date
-      #"#{(Date.today - date).to_i} days ago"
-    else
-      date.strftime("%a #{date.day.ordinalize}")
+    case date.to_date
+      when Date.today then "Today"
+      when Date.yesterday then "Yesterday"
+      else date.strftime("%a #{date.day.ordinalize}")
     end
   end
 end
