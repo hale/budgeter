@@ -14,7 +14,7 @@ jQuery ($) ->
       type: 'POST',
       data: { 'date': date }
       error: ->
-        $this.addClass('error')
+        $this.addClass('error').removeClass('success')
       success: (json) ->
-        $this.removeClass('error')
+        $this.addClass('success').removeClass('error')
         $this.val(json.date)

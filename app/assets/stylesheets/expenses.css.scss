@@ -8,3 +8,8 @@ table#expenses th#date {
 table {
   width: 100%;
 }
+
+input.success {
+  border-color: green;
+  background-color: lightgreen;
+}
