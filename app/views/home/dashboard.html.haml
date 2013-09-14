@@ -9,17 +9,29 @@
 
 %hr
 
-%div.large-3.columns
-  %h2
-    Summary
-  = render :partial => 'expenses/summary'
-%div.large-8.columns
-  %h2
-    Expenses
-    %small
-      = link_to "new", '#', 'data-reveal-id' => 'quick-add-modal'
+%ul.inline-list
+  %li
+    = link_to "Just added", dashboard_path(:tab => :just_added)
+  %li
+    = link_to "By week", dashboard_path(:tab => :by_week)
 
-  - @expenses_by_week.each_pair do |date, expenses|
-    %h3
-      = date.to_s(:week)
-    = render :partial => 'home/expenses', :locals => { :expenses => expenses }
+- if current_tab == "just_added"
+  .row
+    %h2
+      Just added
+      %small
+        = link_to "new", '#', 'data-reveal-id' => 'quick-add-modal'
+
+    = render :partial => 'home/expenses', :locals => { :expenses => Expense.just_added }
+
+- elsif current_tab == "by_week"
+  .row
+    %h2
+      = @date.strftime("%B")
+      %small
+        = link_to "new", '#', 'data-reveal-id' => 'quick-add-modal'
+
+    - @expenses_by_week.each_pair do |date, expenses|
+      %h3
+        = date.to_s(:week)
+      = render :partial => 'home/expenses', :locals => { :expenses => expenses }

@@ -1,0 +1,11 @@
+%table#expenses
+  %tr
+    %th Added
+    %th Description
+    %th
+
+  - Expense.just_added.each do |expense|
+    %tr
+      %td= pretty_date expense.created_at
+      %td= expense.description.truncate(15)
+      %td= link_to 'edit', edit_expense_path(expense)
