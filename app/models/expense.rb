@@ -11,6 +11,8 @@ class Expense < ActiveRecord::Base
     ->(date) { where(:date => date.beginning_of_month..date.end_of_month) }
   scope :category,
     ->(name) { where('categories.name = ?', name).joins(:category) }
+  scope :just_added,
+    ->       { where('created_at > ?', 1.week.ago).order('created_at DESC') }
 
   register_currency :gbp
   monetize :amount_pennies, :numericality => { :greater_than => 0 }

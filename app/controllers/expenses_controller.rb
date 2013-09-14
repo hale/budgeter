@@ -21,7 +21,7 @@ class ExpensesController < ApplicationController
     @expense = Expense.build_with_defaults(expense_params_with_category)
     flash[:notice] = 'Expense was successfully created.' if @expense.save
     respond_with @expense do |format|
-      format.html { redirect_to root_path }
+      format.html { redirect_to root_path(:tab => "just_added") }
     end
   end
 
